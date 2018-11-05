@@ -1,15 +1,15 @@
-function Background (game) {  //porque le paso el param??
+function Background (game) {  
   
   
-    this.game = game; //pq???
+    this.game = game; 
 
 
   this.img = new Image();
-  this.img.src = "./Images/space.jpg";
+  this.img.src = "./Images/galaxy.jpg";
 
   this.x = 0;
   this.y = 0;
-  this.dy = 10;
+  this.dy = 4;
 }
 
 
@@ -21,9 +21,9 @@ Background.prototype.draw = function() {
 };
 
 Background.prototype.move = function() {
-  this.y -= this.dy;
+  this.y += this.dy;
 
-  if (this.y < -this.game.canvas.height) this.y = 0;  //pq
+  if (this.y > 0)   this.y = -this.game.canvas.height;  
 };
 
 
