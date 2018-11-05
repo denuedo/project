@@ -22,6 +22,7 @@ Game.prototype.start = function() {
     this.player.move();
     this.drawObstacles();
     this.moveObstacles();
+    
     //this.generateObstacles();
     this.framesCounter++;
 
@@ -52,6 +53,9 @@ Game.prototype.drawObstacles = function() {
   this.obstacles.forEach(function(element) {
     element.drawObstacles();
   });
+}
+
+
 
 
   Game.prototype.moveObstacles = function() {
@@ -59,6 +63,51 @@ Game.prototype.drawObstacles = function() {
     this.obstacles.forEach(function(element) {
       element.moveObstacles();
     });
+}
 
-}
-}
+
+Game.prototype.hasCrashed = function() {
+  this.player.left   = function() { return this.player.x                 }
+    this.player.right  = function() { return (this.player.x + this.player.width)  }
+    this.player.top    = function() { return this.player.y                 }
+    
+    this.obstacles.bottom = function() { return this.y + (this.height) }
+    this.obstacles.left = function() { return this.obstacles.x                 }
+    this.obstacles.right  = function() { return (this.obstacles.x + this.obstacles.width)  }
+
+    
+    
+      if (this.drawObstacles()&&
+          (this.player.top()    < this.obstacles.bottom()) &&
+          (this.player.right()  > this.obstacles.left())   &&
+          (this.player.left()   < this.obstacles.right())) {
+
+          this.drawObstacles() = false;
+        }
+               
+               
+    
+
+  }.bind(this); 
+  
+
+  
+
+  // if( a.x+a.w >= b.x && 
+  //   b.x+b.w >= a.x &&
+  //   a.y+a.h >= b.y && 
+  //   b.y+b.h >= a.y
+  // ){} 
+
+
+// Game.prototype.isCollision = function() {
+//   // colisiones genéricas 
+//   // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
+//   return this.obstacles.some(function(obstacle) {
+//     return (
+//       ((this.player.x + this.player.w) >= obstacle.x &&
+//        this.player.x < (obstacle.x + obstacle.w) &&
+//        this.player.y + (this.player.h - 20) >= obstacle.y)
+//     );
+//   }.bind(this));
+// };
