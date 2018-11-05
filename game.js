@@ -11,6 +11,7 @@ function Game(canvas) {  //debo poner canvasID? x??
 Game.prototype.reset = function(){
   this.background = new Background(this);
   this.player = new Player(this);
+  this.obstacles = new Obstacles(this);
 
   
 }
@@ -22,6 +23,9 @@ Game.prototype.start = function() {
     this.background.draw();
     this.background.move();
     this.player.drawPlayer();
+    this.player.move();
+    this.obstacles.drawObstacles();
+    this.obstacles.moveObstacles();
 
     
 
