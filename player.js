@@ -24,7 +24,17 @@ Player.prototype.moveRight = function() {
 }
 
 Player.prototype.move = function() {
+
+  console.log(this.x);
   this.x += this.speedX;
+  if (this.x < 0) {
+    this.x = 0;
+  };
+
+  if(this.x +150 > this.game.canvas.width){
+    this.x  = this.game.canvas.width -150;
+  }
+  
 }
 
 
@@ -54,8 +64,12 @@ Player.prototype.setListeners = function(){
 
   }.bind(this);
 
-  
 };
+
+
+
+
+
 
 
 

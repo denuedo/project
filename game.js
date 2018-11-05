@@ -1,21 +1,17 @@
 function Game(canvas) {  //debo poner canvasID? x??
   this.canvas = document.getElementById(canvas); //se puede poner con selectorAll? 
   this.ctx =this.canvas.getContext("2d");
-  this.fps = 60;   //pq?
+  this.fps = 60;   
 
-      this.reset(); //de momento no hace falta. pero pq llama aquí a reset?
-      
-      
+      this.reset(); //para hacer un reset a nuevo o a 0   
 }
 
 Game.prototype.reset = function(){
   this.background = new Background(this);
   this.player = new Player(this);
-  this.obstacles = new Obstacles(this);
-
-  
+  this.obstacles = [];
+  this.framesCounter=0;
 }
-
 
 Game.prototype.start = function() {
   this.interval = setInterval(function() { 
@@ -24,10 +20,19 @@ Game.prototype.start = function() {
     this.background.move();
     this.player.drawPlayer();
     this.player.move();
-    this.obstacles.drawObstacles();
-    this.obstacles.moveObstacles();
+    this.drawObstacles();
+    this.moveObstacles();
+    //this.generateObstacles();
+    this.framesCounter++;
 
+    if (this.framesCounter > 1000) {
+      this.framesCounter = 0;
+    }
     
+    if (this.framesCounter % 170 === 0){
+      this.generateObstacles();
+    }
+
 
   } .bind(this), 1000 / this.fps);
 };
@@ -37,3 +42,23 @@ Game.prototype.clear = function() {
 }; 
 
 
+Game.prototype.generateObstacles = function() {
+  
+  this.obstacles.push(new Obstacles(this));
+};
+
+Game.prototype.drawObstacles = function() {
+
+  this.obstacles.forEach(function(element) {
+    element.drawObstacles();
+  });
+
+
+  Game.prototype.moveObstacles = function() {
+
+    this.obstacles.forEach(function(element) {
+      element.moveObstacles();
+    });
+
+}
+}
