@@ -19,7 +19,7 @@ Game.prototype.start = function() {
 
 Game.prototype.pause = function() {
   clearInterval(this.interval);
-  setTimeout(this.interval = setInterval(this.run.bind(this), 1000 / this.fps ), 1000);
+  setTimeout(this.interval = setInterval(this.run, 1000 / this.fps ), 1000);
 }
 
 Game.prototype.run = function() { 
@@ -35,9 +35,7 @@ Game.prototype.run = function() {
     this.player.drawPlayerGreen();
     this.pause();
 
-
-
-
+  
   } else {
     this.player.drawPlayer();
   }
