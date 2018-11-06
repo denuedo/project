@@ -4,6 +4,8 @@ this.game = game;
 
 this.x = 400;
   this.y =-20;
+  this.width= 60;
+  this.height= 60;
   this.speedY = -3;
   this.min = 10;
   this.max = 450;
@@ -14,7 +16,7 @@ this.x = 400;
 
 Obstacles.prototype.drawObstacles = function(){
   // this.game.ctx.drawImage(this.img, this.x, this.y, 60,60);
-  this.game.ctx.drawImage(this.img, this.x + this.random, this.y, 60,60);
+  this.game.ctx.drawImage(this.img, this.x + this.random, this.y, this.width,this.height);
   
   };
 

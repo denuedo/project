@@ -4,6 +4,8 @@ function Player (game){
  
   this.x = 670;
   this.y = 400;
+  this.width =150;
+  this.height = 300;
   this.speedX = 0;
   this.img = new Image();
   this.img.src = "./Images/superman.png";
@@ -11,7 +13,7 @@ function Player (game){
 }
 
 Player.prototype.drawPlayer = function(){
-this.game.ctx.drawImage(this.img, this.x, this.y, 150, 300);
+this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 };
 
 
@@ -25,14 +27,14 @@ Player.prototype.moveRight = function() {
 
 Player.prototype.move = function() {
 
-  console.log(this.x);
+  // console.log(this.x);
   this.x += this.speedX;
   if (this.x < 0) {
     this.x = 0;
   };
 
-  if(this.x +150 > this.game.canvas.width){
-    this.x  = this.game.canvas.width -150;
+  if(this.x +this.width > this.game.canvas.width){
+    this.x  = this.game.canvas.width -this.width;
   }
   
 }

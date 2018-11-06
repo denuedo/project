@@ -22,6 +22,7 @@ Game.prototype.start = function() {
     this.player.move();
     this.drawObstacles();
     this.moveObstacles();
+    this.hasCrashed()
     
     //this.generateObstacles();
     this.framesCounter++;
@@ -66,29 +67,39 @@ Game.prototype.drawObstacles = function() {
 }
 
 
-Game.prototype.hasCrashed = function() {
-  this.player.left   = function() { return this.player.x                 }
-    this.player.right  = function() { return (this.player.x + this.player.width)  }
-    this.player.top    = function() { return this.player.y                 }
+Game.prototype.hasCrashed = function() { 
+  //debugger
+  // console.log(this.player);
+  // this.player.left   = function() { return this.player.x                 }
+  //   this.player.right  = function() { return (this.player.x + this.player.width)  }
+  //   this.player.top    = function() { return this.player.y                 }
     
-    this.obstacles.bottom = function() { return this.y + (this.height) }
-    this.obstacles.left = function() { return this.obstacles.x                 }
-    this.obstacles.right  = function() { return (this.obstacles.x + this.obstacles.width)  }
+  //   this.obstacles.bottom = function() { return this.y + (this.height) }
+  //   this.obstacles.left = function() { return this.obstacles.x                 }
+  //   this.obstacles.right  = function() { return (this.obstacles.x + this.obstacles.width)  }
 
     
-    
-      if (this.drawObstacles()&&
-          (this.player.top()    < this.obstacles.bottom()) &&
-          (this.player.right()  > this.obstacles.left())   &&
-          (this.player.left()   < this.obstacles.right())) {
-
-          this.drawObstacles() = false;
+    this.obstacles.some(function(obstacle){
+      //debugger
+       if (
+        (this.player.y < obstacle.y + obstacle.height) &&
+        (this.player.x + this.player.width  > obstacle.x + obstacle.random)   &&
+        (this.player.x   < obstacle.x + obstacle.random + obstacle.width - 20) &&
+        (this.player.y + this.player.height > obstacle.y) 
+        ) {
+          
         }
+
+      
+    }.bind(this)
+    )
+      
+        
                
                
     
 
-  }.bind(this); 
+  }
   
 
   
