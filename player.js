@@ -7,8 +7,13 @@ function Player (game){
   this.width =150;
   this.height = 300;
   this.speedX = 0;
+
   this.img = new Image();
   this.img.src = "./Images/superman.png";
+
+  this.img2 = new Image();
+  this.img2.src = "./Images/blackSup.png";
+
   this.setListeners();
 }
 
@@ -16,6 +21,9 @@ Player.prototype.drawPlayer = function(){
 this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 };
 
+Player.prototype.drawPlayerGreen = function(){
+  this.game.ctx.drawImage(this.img2, this.x, this.y, this.width, this.height);
+  };
 
 Player.prototype.moveLeft = function() {
   this.speedX -= 5;

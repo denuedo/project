@@ -3,7 +3,7 @@ function Game(canvas) {  //debo poner canvasID? x??
   this.ctx =this.canvas.getContext("2d");
   this.fps = 60;   
 
-      this.reset(); //para hacer un reset a nuevo o a 0   
+  this.reset(); //para hacer un reset a nuevo o a 0   
 }
 
 Game.prototype.reset = function(){
@@ -14,30 +14,51 @@ Game.prototype.reset = function(){
 }
 
 Game.prototype.start = function() {
-  this.interval = setInterval(function() { 
-    this.clear();  
-    this.background.draw();
-    this.background.move();
-    this.player.drawPlayer();
-    this.player.move();
-    this.drawObstacles();
-    this.moveObstacles();
-    this.hasCrashed()
-    
-    //this.generateObstacles();
-    this.framesCounter++;
-
-    if (this.framesCounter > 1000) {
-      this.framesCounter = 0;
-    }
-    
-    if (this.framesCounter % 170 === 0){
-      this.generateObstacles();
-    }
-
-
-  } .bind(this), 1000 / this.fps);
+  this.interval = setInterval(this.run.bind(this), 1000 / this.fps);
 };
+
+Game.prototype.pause = function() {
+  clearInterval(this.interval);
+  setTimeout(this.interval = setInterval(this.run.bind(this), 1000 / this.fps ), 1000);
+}
+
+Game.prototype.run = function() { 
+  this.clear();  
+  this.background.draw();
+  this.background.move();
+  
+  this.player.move();
+  this.drawObstacles();
+  this.moveObstacles();
+  
+  if (this.hasCrashed()){
+    this.player.drawPlayerGreen();
+    this.pause();
+
+
+
+
+  } else {
+    this.player.drawPlayer();
+  }
+  
+  
+
+  this.framesCounter++;
+
+  if (this.framesCounter > 1000) {
+    this.framesCounter = 0;
+  }
+  
+  if (this.framesCounter % 170 === 0){
+    this.generateObstacles();
+  }
+
+
+
+
+
+}
 
 Game.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -79,7 +100,7 @@ Game.prototype.hasCrashed = function() {
   //   this.obstacles.right  = function() { return (this.obstacles.x + this.obstacles.width)  }
 
     
-    this.obstacles.some(function(obstacle){
+    return this.obstacles.some(function(obstacle){
       //debugger
        if (
         (this.player.y < obstacle.y + obstacle.height) &&
@@ -87,38 +108,51 @@ Game.prototype.hasCrashed = function() {
         (this.player.x   < obstacle.x + obstacle.random + obstacle.width - 20) &&
         (this.player.y + this.player.height > obstacle.y) 
         ) {
-          
+          return true;
+        } else {
+          return false;
         }
 
-      
     }.bind(this)
     )
-      
-        
-               
-               
-    
-
+   
   }
   
 
   
 
-  // if( a.x+a.w >= b.x && 
-  //   b.x+b.w >= a.x &&
-  //   a.y+a.h >= b.y && 
-  //   b.y+b.h >= a.y
-  // ){} 
+//   function IntervalTimer(callback, interval) {
+//     var startTime, remaining = 0;
+//     var state = 0; //  0 = idle, 1 = running, 2 = paused, 3= resumed
 
+//     this.pause = function () {
+//         if (state != 1) return;
 
-// Game.prototype.isCollision = function() {
-//   // colisiones genéricas 
-//   // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
-//   return this.obstacles.some(function(obstacle) {
-//     return (
-//       ((this.player.x + this.player.w) >= obstacle.x &&
-//        this.player.x < (obstacle.x + obstacle.w) &&
-//        this.player.y + (this.player.h - 20) >= obstacle.y)
-//     );
-//   }.bind(this));
-// };
+//         remaining = interval - (new Date() - startTime);
+//         window.clearInterval(this.interval);
+//         state = 2;
+//     };
+
+//     this.resume = function () {
+//         if (state != 2) return;
+
+//         state = 3;
+
+    
+
+//     };
+
+//     this.timeoutCallback = function () {
+//         if (state != 3) return;
+
+//         callback();
+
+//         startTime = new Date();
+//         this.interval = window.setInterval(callback, interval);
+//         state = 1;
+//     };
+
+//     startTime = new Date();
+//     this.interval = window.setInterval(callback, interval);
+//     state = 1;
+// }
