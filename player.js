@@ -12,7 +12,7 @@ function Player (game){
   this.img.src = "./Images/lego.png";
 
   this.img2 = new Image();
-  this.img2.src = "./Images/blackSup.png";
+  this.img2.src = "./Images/greenLego.png";
 
   this.setListeners();
 }
