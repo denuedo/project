@@ -44,10 +44,10 @@ Game.prototype.pause = function() {
   setTimeout(function(){
     clearInterval(blinkId)
     this.collisionSound.pause();
-  }.bind(this),1000);
+  }.bind(this),3400);
   
   setTimeout(
-    function(){this.interval = setInterval(this.run.bind(this), 1000 / this.fps )}.bind(this), 1000);
+    function(){this.interval = setInterval(this.run.bind(this), 1000 / this.fps )}.bind(this), 3400);
 }
 
 Game.prototype.run = function() { 
