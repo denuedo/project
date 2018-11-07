@@ -10,16 +10,42 @@ Game.prototype.reset = function(){
   this.background = new Background(this);
   this.player = new Player(this);
   this.obstacles = [];
-  this.framesCounter=0;
-}
+  this.framesCounter = 0;
+  
+  this.collisionSound = new Audio("./Audios/killbill.mp3");
+  
 
 Game.prototype.start = function() {
   this.interval = setInterval(this.run.bind(this), 1000 / this.fps);
+  
 };
 
 Game.prototype.pause = function() {
-  
   clearInterval(this.interval);
+  
+
+  var count = true;
+  var framesCount = 0;
+  var blinkId = setInterval(function() {
+    // debugger
+
+    if(count) {
+      this.player.drawPlayerGreen()
+    } else {
+      this.player.drawPlayer()
+    }
+
+    if(framesCount % 10 == 0) count = !count;
+
+    framesCount++;
+    
+    
+  }.bind(this), 900 / this.fps)
+  setTimeout(function(){
+    clearInterval(blinkId)
+    this.collisionSound.pause();
+  }.bind(this),1000);
+  
   setTimeout(
     function(){this.interval = setInterval(this.run.bind(this), 1000 / this.fps )}.bind(this), 1000);
 }
@@ -34,8 +60,9 @@ Game.prototype.run = function() {
   this.moveObstacles();
   
   if (this.hasCrashed()){
-    this.player.drawPlayerGreen();
+    
     this.pause();
+    this.collisionSound.play();
 
   
   } else {
@@ -54,10 +81,6 @@ Game.prototype.run = function() {
     this.generateObstacles();
   }
 
-
-
-
-
 }
 
 Game.prototype.clear = function() {
@@ -66,12 +89,11 @@ Game.prototype.clear = function() {
 
 
 Game.prototype.generateObstacles = function() {
-  
   this.obstacles.push(new Obstacles(this));
 };
 
-Game.prototype.drawObstacles = function() {
 
+Game.prototype.drawObstacles = function() {
   this.obstacles.forEach(function(element) {
     element.drawObstacles();
   });
@@ -79,8 +101,7 @@ Game.prototype.drawObstacles = function() {
 
 
 
-
-  Game.prototype.moveObstacles = function() {
+Game.prototype.moveObstacles = function() {
 
     this.obstacles.forEach(function(element) {
       element.moveObstacles();
@@ -89,18 +110,9 @@ Game.prototype.drawObstacles = function() {
 
 
 Game.prototype.hasCrashed = function() { 
-  //debugger
-  // console.log(this.player);
-  // this.player.left   = function() { return this.player.x                 }
-  //   this.player.right  = function() { return (this.player.x + this.player.width)  }
-  //   this.player.top    = function() { return this.player.y                 }
+  
     
-  //   this.obstacles.bottom = function() { return this.y + (this.height) }
-  //   this.obstacles.left = function() { return this.obstacles.x                 }
-  //   this.obstacles.right  = function() { return (this.obstacles.x + this.obstacles.width)  }
-
-    
-    return this.obstacles.some(function(obstacle,index){
+    return this.obstacles.some(function(obstacle,index){ 
       
        if (
         (this.player.y < obstacle.y + obstacle.height) &&
@@ -108,7 +120,7 @@ Game.prototype.hasCrashed = function() {
         (this.player.x   < obstacle.x + obstacle.random + obstacle.width - 20) &&
         (this.player.y + this.player.height > obstacle.y) 
         ) {
-          this.obstacles.splice(index,1);
+          this.obstacles.splice(index,1); 
           return true;
         } else {
           return false;
@@ -119,41 +131,4 @@ Game.prototype.hasCrashed = function() {
    
   }
   
-
-  
-
-//   function IntervalTimer(callback, interval) {
-//     var startTime, remaining = 0;
-//     var state = 0; //  0 = idle, 1 = running, 2 = paused, 3= resumed
-
-//     this.pause = function () {
-//         if (state != 1) return;
-
-//         remaining = interval - (new Date() - startTime);
-//         window.clearInterval(this.interval);
-//         state = 2;
-//     };
-
-//     this.resume = function () {
-//         if (state != 2) return;
-
-//         state = 3;
-
-    
-
-//     };
-
-//     this.timeoutCallback = function () {
-//         if (state != 3) return;
-
-//         callback();
-
-//         startTime = new Date();
-//         this.interval = window.setInterval(callback, interval);
-//         state = 1;
-//     };
-
-//     startTime = new Date();
-//     this.interval = window.setInterval(callback, interval);
-//     state = 1;
-// }
+}
