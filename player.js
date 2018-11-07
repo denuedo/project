@@ -9,7 +9,7 @@ function Player (game){
   this.speedX = 0;
 
   this.img = new Image();
-  this.img.src = "./Images/superman.png";
+  this.img.src = "./Images/lego.png";
 
   this.img2 = new Image();
   this.img2.src = "./Images/blackSup.png";

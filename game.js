@@ -12,7 +12,11 @@ Game.prototype.reset = function(){
   this.obstacles = [];
   this.framesCounter = 0;
   
+  
   this.collisionSound = new Audio("./Audios/killbill.mp3");
+  this.supermanTheme = new Audio("./Audios/superman.mp3");
+
+  
   
 
 Game.prototype.start = function() {
@@ -58,12 +62,14 @@ Game.prototype.run = function() {
   this.player.move();
   this.drawObstacles();
   this.moveObstacles();
+  this.supermanTheme.play();
   
   if (this.hasCrashed()){
     
     this.pause();
+    
     this.collisionSound.play();
-
+    this.supermanTheme.pause();
   
   } else {
     this.player.drawPlayer();
