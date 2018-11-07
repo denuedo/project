@@ -18,8 +18,10 @@ Game.prototype.start = function() {
 };
 
 Game.prototype.pause = function() {
+  
   clearInterval(this.interval);
-  setTimeout(this.interval = setInterval(this.run, 1000 / this.fps ), 1000);
+  setTimeout(
+    function(){this.interval = setInterval(this.run.bind(this), 1000 / this.fps )}.bind(this), 1000);
 }
 
 Game.prototype.run = function() { 
@@ -98,14 +100,15 @@ Game.prototype.hasCrashed = function() {
   //   this.obstacles.right  = function() { return (this.obstacles.x + this.obstacles.width)  }
 
     
-    return this.obstacles.some(function(obstacle){
-      //debugger
+    return this.obstacles.some(function(obstacle,index){
+      
        if (
         (this.player.y < obstacle.y + obstacle.height) &&
         (this.player.x + this.player.width  > obstacle.x + obstacle.random)   &&
         (this.player.x   < obstacle.x + obstacle.random + obstacle.width - 20) &&
         (this.player.y + this.player.height > obstacle.y) 
         ) {
+          this.obstacles.splice(index,1);
           return true;
         } else {
           return false;
