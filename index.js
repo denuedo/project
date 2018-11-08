@@ -7,6 +7,14 @@ window.onload = function() { //cuando el objeto window está cargado haz:
     document.querySelector(".canvas-screen").style.display = "block";
     startGame();
   };
+
+  document.querySelector(".gameover-button").onclick = function() {
+    document.querySelector(".gameover-button").style.display = "none";
+    document.querySelector(".start-screen").style.display = "block";
+    
+  };
+
+  
   
   // cuando se hace click en el boton, llamar a función y cambia display de los div
   

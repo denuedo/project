@@ -67,7 +67,7 @@ Game.prototype.run = function() {
   this.moveObstacles();
   this.supermanTheme.play();
   this.drawScore();
-  this.score += 0.01;
+  this.score += 0.015;
   this.drawLife(); 
   
   
