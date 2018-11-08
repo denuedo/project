@@ -15,6 +15,7 @@ Game.prototype.reset = function(){
   
   this.collisionSound = new Audio("./Audios/killbill.mp3");
   this.supermanTheme = new Audio("./Audios/superman.mp3");
+  this.gOver = new Audio("./Audios/gOver.mp3");
   
   this.shield = new Image();
   this.shield.src = "./Images/shield.png";
@@ -119,15 +120,15 @@ Game.prototype.moveObstacles = function() {
 }
 
 Game.prototype.drawScore = function() {
-  this.ctx.font = "30px sans-serif";
-  this.ctx.fillStyle = "green";
-  this.ctx.fillText(Math.floor(this.score), 47, 80);
+  this.ctx.font = "30px 'Press Start 2P'";
+  this.ctx.fillStyle = "red";
+  this.ctx.fillText(Math.floor(this.score), 42, 80);
 }
 
 Game.prototype.drawTextGameOver = function(){
-  this.ctx.font = "30px impact";
-  this.ctx.fillStyle = "green";
-  this.ctx.fillText("GAME", 480, 200);
+  this.ctx.font = "100px 'Press Start 2P'";
+  this.ctx.fillStyle = "red";
+  this.ctx.fillText("GAME", 149, 200);
   this.ctx.fillText("OVER", 900, 200);
 
 
@@ -144,6 +145,8 @@ Game.prototype.drawLife = function(){
   
   this.background.drawGameOver();
   this.drawTextGameOver();
+  this.supermanTheme.pause();
+  this.gOver.play();
   
   }
 }

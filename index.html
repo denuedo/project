@@ -2,8 +2,10 @@
 <html>
 
 <head>
+
   <title>My Project</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Ceviche+One|Press+Start+2P" rel="stylesheet">
   <script type="text/javascript" src="./obstacles.js"></script>
   <script type="text/javascript" src="./background.js"></script>
   <script type="text/javascript" src="./player.js"></script>
@@ -11,12 +13,24 @@
   
  
   <script type="text/javascript" src="./index.js"></script>
+  <link rel="stylesheet" href="styles.css">
+ 
 
   
 </head>
 
 <body>
-  <canvas id="canvas" width="1420" height="740"></canvas>
+    
+
+  <div class="start-screen">
+    <button type="button"> 
+        <img src="./Images/sVector.gif" alt="sGif" width="1420" height="740">
+    </button>
+  </div>
+  
+  <div class="canvas-screen">
+      <canvas id="canvas" width="1420" height="740"></canvas>
+  </div>
 </body>
 
 </html>

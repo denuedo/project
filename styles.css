@@ -1,0 +1,14 @@
+.canvas-screen {
+  display: none; 
+}
+
+.start-screen {
+  display: block; 
+}
+
+        @import url('https://fonts.googleapis.com/css?family=Black+Ops+One');
+        * {
+          font-family: 'Press Start 2P', cursive;
+        }
+        
+    
