@@ -17,10 +17,8 @@ Game.prototype.reset = function(){
   this.collisionSound = new Audio("./Audios/killbill.mp3");
   this.supermanTheme = new Audio("./Audios/superman.mp3");
   
-  this.shield =new Image();
-  this.img.src = "./Images";
-
-
+  this.shield = new Image();
+  this.shield.src = "./Images/shield.png";
   
   
 
@@ -70,6 +68,8 @@ Game.prototype.run = function() {
   this.supermanTheme.play();
   this.drawScore();
   this.score += 0.01;
+  this.drawLife(); 
+  
   
   if (this.hasCrashed()){
     
@@ -125,13 +125,15 @@ Game.prototype.moveObstacles = function() {
 Game.prototype.drawScore = function() {
   this.ctx.font = "30px sans-serif";
   this.ctx.fillStyle = "green";
-  this.ctx.fillText(Math.floor(this.score), 50, 50);
+  this.ctx.fillText(Math.floor(this.score), 47, 80);
 }
 
 Game.prototype.drawLife = function(){
   for(var i = 0; i < this.player.life; i++)
-  ImgESCUDO
-y+num
+  
+  this.ctx.drawImage(this.shield, 25, 100 + i*70, 60, 60);
+
+
 
 }
 
