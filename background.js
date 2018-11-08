@@ -23,6 +23,12 @@ Background.prototype.draw = function() {
 
 };
 
+
+Background.prototype.drawGameOver = function() {
+  this.game.ctx.drawImage(this.gameOver, 0, 0, this.game.canvas.width, this.game.canvas.height);
+  
+};
+
 Background.prototype.move = function() {
   this.y += this.dy;
 

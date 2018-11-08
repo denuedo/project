@@ -13,15 +13,15 @@ Game.prototype.reset = function(){
   this.framesCounter = 0;
   this.score =0;
   
-  
   this.collisionSound = new Audio("./Audios/killbill.mp3");
   this.supermanTheme = new Audio("./Audios/superman.mp3");
   
   this.shield = new Image();
   this.shield.src = "./Images/shield.png";
-  
-  
 
+  this.endBackground = new Background(this);
+  
+  
 Game.prototype.start = function() {
   this.interval = setInterval(this.run.bind(this), 1000 / this.fps);
   
@@ -61,6 +61,7 @@ Game.prototype.run = function() {
   this.background.move();
   
   this.player.move();
+  this.player.drawPlayer();
   this.drawObstacles();
   this.moveObstacles();
   this.supermanTheme.play();
@@ -77,9 +78,7 @@ Game.prototype.run = function() {
     this.supermanTheme.pause();
     this.player.life -=1;
   
-  } else {
-    this.player.drawPlayer();
-  }
+  } 
   
 
   this.framesCounter++;
@@ -125,12 +124,28 @@ Game.prototype.drawScore = function() {
   this.ctx.fillText(Math.floor(this.score), 47, 80);
 }
 
+Game.prototype.drawTextGameOver = function(){
+  this.ctx.font = "30px impact";
+  this.ctx.fillStyle = "green";
+  this.ctx.fillText("GAME", 480, 200);
+  this.ctx.fillText("OVER", 900, 200);
+
+
+}
+
 Game.prototype.drawLife = function(){
   for(var i = 0; i < this.player.life; i++)
   
   this.ctx.drawImage(this.shield, 25, 100 + i*70, 60, 60);
 
-  if (this.player.life == 0) this.pause();
+  if (this.player.life == 0) {
+  clearInterval(this.interval);
+  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  
+  this.background.drawGameOver();
+  this.drawTextGameOver();
+  
+  }
 }
 
 

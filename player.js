@@ -7,7 +7,7 @@ function Player (game){
   this.width =150;
   this.height = 300;
   this.speedX = 0;
-  this.life = 4;
+  this.life = 1;
 
   this.img = new Image();
   this.img.src = "./Images/lego.png";
