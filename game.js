@@ -11,10 +11,15 @@ Game.prototype.reset = function(){
   this.player = new Player(this);
   this.obstacles = [];
   this.framesCounter = 0;
+  this.score =0;
   
   
   this.collisionSound = new Audio("./Audios/killbill.mp3");
   this.supermanTheme = new Audio("./Audios/superman.mp3");
+  
+  this.shield =new Image();
+  this.img.src = "./Images";
+
 
   
   
@@ -63,6 +68,8 @@ Game.prototype.run = function() {
   this.drawObstacles();
   this.moveObstacles();
   this.supermanTheme.play();
+  this.drawScore();
+  this.score += 0.01;
   
   if (this.hasCrashed()){
     
@@ -70,6 +77,7 @@ Game.prototype.run = function() {
     
     this.collisionSound.play();
     this.supermanTheme.pause();
+    this.player.life -=1;
   
   } else {
     this.player.drawPlayer();
@@ -114,6 +122,18 @@ Game.prototype.moveObstacles = function() {
     });
 }
 
+Game.prototype.drawScore = function() {
+  this.ctx.font = "30px sans-serif";
+  this.ctx.fillStyle = "green";
+  this.ctx.fillText(Math.floor(this.score), 50, 50);
+}
+
+Game.prototype.drawLife = function(){
+  for(var i = 0; i < this.player.life; i++)
+  ImgESCUDO
+y+num
+
+}
 
 Game.prototype.hasCrashed = function() { 
   
@@ -121,7 +141,7 @@ Game.prototype.hasCrashed = function() {
     return this.obstacles.some(function(obstacle,index){ 
       
        if (
-        (this.player.y < obstacle.y + obstacle.height) &&
+        (this.player.y < obstacle.y + obstacle.height-25) &&
         (this.player.x + this.player.width  > obstacle.x + obstacle.random)   &&
         (this.player.x   < obstacle.x + obstacle.random + obstacle.width - 20) &&
         (this.player.y + this.player.height > obstacle.y) 
