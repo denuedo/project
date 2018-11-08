@@ -26,7 +26,8 @@ Background.prototype.draw = function() {
 
 Background.prototype.drawGameOver = function() {
   this.game.ctx.drawImage(this.gameOver, 0, 0, this.game.canvas.width, this.game.canvas.height);
-  
+  var button = document.getElementsByClassName("gameover-button")[0];
+  button.classList.toggle('visible');
 };
 
 Background.prototype.move = function() {

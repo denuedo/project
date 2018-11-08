@@ -8,11 +8,8 @@ window.onload = function() { //cuando el objeto window está cargado haz:
     startGame();
   };
   
-  
-
-  
   // cuando se hace click en el boton, llamar a función y cambia display de los div
-  startGame();
+  
 };
 
 // funcion para empezar el canvas

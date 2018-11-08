@@ -1,9 +1,9 @@
-.canvas-screen {
+/*  .canvas-screen {
   display: none; 
 }
 
 .start-screen {
-  display: block; 
+  display: block;  
 }
 
         @import url('https://fonts.googleapis.com/css?family=Black+Ops+One');
@@ -11,4 +11,23 @@
           font-family: 'Press Start 2P', cursive;
         }
         
-    
+     */
+
+.gameover-button {
+  display: none;
+}
+
+.canvas-screen {
+  position: relative;
+  text-align: center;
+}
+
+.visible {
+  display: block;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-37%);
+  padding: 30px 50px;
+}
+
