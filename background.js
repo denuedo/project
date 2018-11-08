@@ -7,6 +7,9 @@ function Background (game) {
   this.img = new Image();
   this.img.src = "./Images/galaxy.jpg";
 
+  this.gameOver = new Image();
+  this.gameOver.src = "./Images/LexLuthor.jpg";
+
   this.x = 0;
   this.y = 0;
   this.dy = 4;

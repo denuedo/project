@@ -29,7 +29,6 @@ Game.prototype.start = function() {
 
 Game.prototype.pause = function() {
   clearInterval(this.interval);
-  
 
   var count = true;
   var framesCount = 0;
@@ -41,7 +40,6 @@ Game.prototype.pause = function() {
     } else {
       this.player.drawPlayer()
     }
-
     if(framesCount % 10 == 0) count = !count;
 
     framesCount++;
@@ -82,7 +80,6 @@ Game.prototype.run = function() {
   } else {
     this.player.drawPlayer();
   }
-  
   
 
   this.framesCounter++;
@@ -133,9 +130,9 @@ Game.prototype.drawLife = function(){
   
   this.ctx.drawImage(this.shield, 25, 100 + i*70, 60, 60);
 
-
-
+  if (this.player.life == 0) this.pause();
 }
+
 
 Game.prototype.hasCrashed = function() { 
   
