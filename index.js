@@ -9,7 +9,7 @@ window.onload = function() { //cuando el objeto window está cargado haz:
   };
 
   document.querySelector(".gameover-button").onclick = function() {
-    document.querySelector(".gameover-button").style.display = "none";
+    document.querySelector(".gameover-button").classList.remove('visible');
     document.querySelector(".start-screen").style.display = "block";
     
   };
@@ -23,6 +23,6 @@ window.onload = function() { //cuando el objeto window está cargado haz:
 // funcion para empezar el canvas
 function startGame() {
   var game = new Game("canvas");  //crea una instancia Game ¿en "canvas"?
-  
+  game.clear();
   game.start();   //empieza el canvas . La función está en game.js
 }

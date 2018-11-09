@@ -2,13 +2,13 @@ function Obstacles (game){
 
 this.game = game;
 
-this.x = 400;
+this.x = 100;
   this.y =-20;
   this.width= 60;
   this.height= 60;
   this.speedY = -3;
   this.min = 10;
-  this.max = 450;
+  this.max = 1300;
   this.img = new Image();
   this.img.src = "./Images/rocks.png";
   this.random = this.random();

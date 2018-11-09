@@ -1,3 +1,7 @@
+*{
+  padding:0;
+  margin: 0;
+}
 
 .gameover-button {
   display: none;
@@ -6,6 +10,12 @@
 .canvas-screen {
   position: relative;
   text-align: center;
+  display: none;
+}
+
+.start-screen {
+  width: 100vw;
+  height: 100vh;
 }
 
 .visible {
@@ -24,6 +34,10 @@
   text-decoration: none;
   border: 2px solid rgba(0, 0, 0, 0.2);
   Border-Radius: 80px;
+}
+
+body {
+  background-color: black;
 }
 
 

@@ -34,7 +34,6 @@ Game.prototype.pause = function() {
   var count = true;
   var framesCount = 0;
   var blinkId = setInterval(function() {
-    // debugger
 
     if(count) {
       this.player.drawPlayerGreen()
@@ -44,7 +43,6 @@ Game.prototype.pause = function() {
     if(framesCount % 10 == 0) count = !count;
 
     framesCount++;
-    
     
   }.bind(this), 900 / this.fps)
   setTimeout(function(){
@@ -88,7 +86,7 @@ Game.prototype.run = function() {
     this.framesCounter = 0;
   }
   
-  if (this.framesCounter % 170 === 0){
+  if (this.framesCounter % 60 === 0){
     this.generateObstacles();
   }
 
@@ -122,7 +120,7 @@ Game.prototype.moveObstacles = function() {
 Game.prototype.drawScore = function() {
   this.ctx.font = "30px 'Press Start 2P'";
   this.ctx.fillStyle = "red";
-  this.ctx.fillText(Math.floor(this.score), 42, 80);
+  this.ctx.fillText(this.score < 10 ? `0${Math.floor(this.score)}` : Math.floor(this.score), 42, 80);
 }
 
 Game.prototype.drawTextGameOver = function(){
@@ -131,13 +129,16 @@ Game.prototype.drawTextGameOver = function(){
   this.ctx.fillText("GAME", 149, 200);
   this.ctx.fillText("OVER", 900, 200);
 
+  this.ctx.font = "30px 'Press Start 2P'";
+  this.ctx.fillText(this.score < 10 ? `Score: 0${Math.floor(this.score)}` : `Score: ${Math.floor(this.score)}`, 950, 665);
+
 
 }
 
 Game.prototype.drawLife = function(){
   for(var i = 0; i < this.player.life; i++)
   
-  this.ctx.drawImage(this.shield, 25, 100 + i*70, 60, 60);
+  this.ctx.drawImage(this.shield, 40, 100 + i*70, 60, 60);
 
   if (this.player.life == 0) {
   clearInterval(this.interval);
